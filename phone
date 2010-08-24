@@ -30,10 +30,10 @@ def get_credentials():
     username = None
     secret = None
     for arg in sys.argv:
-        if arg.startswith("---username="):
-            username = arg[12:]
-        elif arg.startswith("---secret="):
-            secret = arg[10:]
+        if arg.startswith("--username="):
+            username = arg[11:]
+        elif arg.startswith("--secret="):
+            secret = arg[9:]
     if username is not None and secret is not None:
         return {"username": user, "secret": secret}
     if not os.path.exists(SETTINGS):
@@ -104,13 +104,16 @@ def main():
     url = None
     title = "phonepipe"
     label = "phonepipe"
+
+    #parser = argparse.ArgumentParser(description='Pipe console output to your Notifo-friendly devices (ie iPhone, iPad, iPod Touch')
+    
     for arg in sys.argv[1:]:
-        if arg.startswith("---url="):
-            url = arg[7:]
-        elif arg.startswith("---title="):
-            title = arg[9:]
-        elif arg.startswith("---label="):
-            label = arg[9:]
+        if arg.startswith("--url="):
+            url = arg[6:]
+        elif arg.startswith("--title="):
+            title = arg[8:]
+        elif arg.startswith("--label="):
+            label = arg[8:]
         else:
             msg.append(arg)
     msg = [" ".join(msg)]

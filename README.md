@@ -29,7 +29,7 @@ The first time you run Phone Pipe it will prompt you for your credentials. It
 will store these in ~/.phonepipe for future use. Alternatively you can also
 specify your username and API key on the command line like such:
 
-    $ phone ---user=someuser ---secret=b52e5fd8b6f14d799798172c1b62c7eb
+    $ phone --user=someuser --secret=b52e5fd8b6f14d799798172c1b62c7eb
 
 
 Usage
@@ -38,11 +38,11 @@ Usage
 All options are triple hyphen prefixed to avoid being squashed by cut and
 paste output or other bits that might be sent in messages.
 
-    ---title - The title of the message.
-    ---label - A message label, generally the name of the sending service.
-    ---url - If specified, the Notifo app makes a link from the message to it.
-    ---username - Override your ~/.phonepipe if you specify a secret as well.
-    ---secret - Override your ~/.phonepipe when specified with a username.
+    --title - The title of the message.
+    --label - A message label, generally the name of the sending service.
+    --url - If specified, the Notifo app makes a link from the message to it.
+    --username - Override your ~/.phonepipe if you specify a secret as well.
+    --secret - Override your ~/.phonepipe when specified with a username.
 
 
 Messages are taken from unknown command line arguments and stdin. The
