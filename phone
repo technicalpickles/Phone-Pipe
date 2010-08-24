@@ -16,12 +16,12 @@ import os
 import sys
 import textwrap
 import urllib
+from optparse import OptionParser
 
 try:
     import simplejson as json
 except:
     import json
-
 
 API_URL = "https://%(username)s:%(secret)s@api.notifo.com/v1/send_notification"
 SETTINGS = os.path.expanduser("~/.phonepipe")
@@ -100,33 +100,30 @@ def alert(msg, url=None, title="phonepipe", label="phonepipe"):
         sys.exit(1)
 
 def main():
-    msg = []
     url = None
     title = "phonepipe"
     label = "phonepipe"
 
-    #parser = argparse.ArgumentParser(description='Pipe console output to your Notifo-friendly devices (ie iPhone, iPad, iPod Touch')
-    
-    for arg in sys.argv[1:]:
-        if arg.startswith("--url="):
-            url = arg[6:]
-        elif arg.startswith("--title="):
-            title = arg[8:]
-        elif arg.startswith("--label="):
-            label = arg[8:]
-        else:
-            msg.append(arg)
-    msg = [" ".join(msg)]
+    parser = OptionParser()
+    parser.add_option("-u", "--url", help="url to open on notification open", default=None)
+    parser.add_option("-t", "--title", help="title of notification", default="phonepipe")
+    parser.add_option("-l", "--label", help="description of application sending notification", default="phonepipe")
+
+    (options, args) = parser.parse_args()
+
+    msg = [" ".join(args)]
     if not sys.stdin.isatty():
         try:
             for line in sys.stdin.readlines():
                 msg.append(line)
         except:
             print "Failed to read message from stdin."
+
     msg = "".join(msg)
     if not msg:
         msg = "Phone Pipe Alert"
-    alert(msg, url=url, title=title, label=label)
+
+    alert(msg, url=options.url, title=options.title, label=options.label)
 
 if __name__ == '__main__':
     main()
